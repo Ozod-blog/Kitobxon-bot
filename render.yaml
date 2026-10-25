@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: kitobxon
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.web:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: RUN_BOT          # bot va WebApp bitta jarayonda ishlaydi
+        value: "true"
+      - key: BOT_TOKEN
+        sync: false
+      - key: BOT_USERNAME
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: DATABASE_URL     # Neon yoki Supabase Postgres manzili
+        sync: false
+      - key: WEBAPP_URL       # https://<servis-nomi>.onrender.com
+        sync: false
+      - key: AI_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: ""
